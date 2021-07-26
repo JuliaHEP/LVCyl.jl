@@ -16,12 +16,28 @@ julia> v2 = LorentzVectorCyl(36.994347f0, 0.38684082f0, -1.3935547f0, 0.10571289
 julia> v1+v2
 LorentzVectorCyl{Float32}(pt=7.1725554, eta=3.3784156, phi=1.3575952, mass=92.55651)
 
-julia> @btime (v1+v2).mass
-  172.854 ns (4 allocations: 96 bytes)
+julia> (v1+v2).mass
+92.55651f0
+```
+
+If you only care about mass, it's much faster to compute.
+
+```julia
+julia> @btime ($v1+$v2).mass
+  85.620 ns (0 allocations: 0 bytes)
 92.55651f0
 
-julia> @btime fast_mass(v1,v2) # faster function if you only care about mass
-  51.800 ns (1 allocation: 16 bytes)
+julia> @btime fast_mass($v1,$v2)
+  20.447 ns (0 allocations: 0 bytes)
 92.55651f0
+```
 
+Some other helper functions
+
+```julia
+julia> deltaphi(v1,v2)
+-3.0791016f0
+
+julia> deltar(v1,v2)
+3.265188f0
 ```
