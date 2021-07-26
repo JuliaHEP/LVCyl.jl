@@ -5,7 +5,7 @@ struct LorentzVectorCyl{T <: AbstractFloat}
     mass::T
 end
 
-Base.show(io::IO, v::LorentzVectorCyl) = println("$(typeof(v))(pt=$(v.pt), eta=$(v.eta), phi=$(v.phi), mass=$(v.mass))")
+Base.show(io::IO, v::LorentzVectorCyl) = print(io, "$(typeof(v))(pt=$(v.pt), eta=$(v.eta), phi=$(v.phi), mass=$(v.mass))")
 
 px(v::LorentzVectorCyl) = v.pt * cos(v.phi)
 py(v::LorentzVectorCyl) = v.pt * sin(v.phi)
@@ -56,12 +56,8 @@ end
 
 # https://root.cern.ch/doc/v606/GenVector_2VectorUtil_8h_source.html#l00061
 @inline function deltaphi(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
-    dphi = v2.phi  - v1.phi
-    if dphi > pi
-        dphi -= 2*pi
-    elseif dphi <= -pi
-        dphi += 2*pi
-    end
+    dphi = v2.phi - v1.phi
+    dphi = dphi - 2*pi*(dphi > pi) + 2*pi*(dphi <= -pi)
     return dphi
 end
 

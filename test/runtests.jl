@@ -11,6 +11,6 @@ using LVCyl
     v2 = LorentzVectorCyl(36.994347f0, 0.38684082f0, -1.3935547f0, 0.10571289f0)
     @test (v1+v2).mass == 92.55651f0
     @test fast_mass(v1,v2) == 92.55651f0
-    @test deltar(v1,v2) == 3.265188f0
-    @test deltaphi(v1,v2) == -3.0791016f0
+    @test isapprox(deltar(v1,v2), 3.265188f0, atol=1e-6)
+    @test isapprox(deltaphi(v1,v2), -3.0791016f0, atol=1e-6)
 end
