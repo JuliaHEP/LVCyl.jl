@@ -23,6 +23,8 @@ julia> (v1+v2).mass
 If you only care about mass, it's much faster to compute.
 
 ```julia
+julia> using BenchmarkTools
+
 julia> @btime ($v1+$v2).mass
   85.620 ns (0 allocations: 0 bytes)
 92.55651f0
