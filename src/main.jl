@@ -72,3 +72,11 @@ end
     return dphi^2 + deta^2
 end
 
+function tocartesian(v::LorentzVectorCyl)
+    x = px(v)
+    y = py(v)
+    z = pz(v)
+    m = v.mass
+    t = sqrt(x^2 + y^2 + z^2 + m^2)
+    (t=t, x=x, y=y, z=z)
+end
