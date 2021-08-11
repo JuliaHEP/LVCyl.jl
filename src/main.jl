@@ -7,6 +7,14 @@ end
 
 Base.show(io::IO, v::LorentzVectorCyl) = print(io, "$(typeof(v))(pt=$(v.pt), eta=$(v.eta), phi=$(v.phi), mass=$(v.mass))")
 
+"""
+    zero(LorentzVectorCyl)
+    zero(LorentzVectorCyl{T})
+Constructs a zero four-vector.
+"""
+Base.zero(::Type{LorentzVectorCyl{T}}) where T = LorentzVectorCyl{T}(zero(T), zero(T), zero(T), zero(T)) 
+Base.zero(::Type{LorentzVectorCyl}) = zero(LorentzVectorCyl{Float64})
+
 px(v::LorentzVectorCyl) = v.pt * cos(v.phi)
 py(v::LorentzVectorCyl) = v.pt * sin(v.phi)
 pz(v::LorentzVectorCyl) = v.pt * sinh(v.eta)
