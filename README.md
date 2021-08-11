@@ -34,6 +34,20 @@ julia> @btime fast_mass($v1,$v2)
 92.55651f0
 ```
 
+Broadcasting works as expected
+
+```julia
+julia> v1 .+ [v1, v2]
+2-element Vector{LorentzVectorCyl{Float32}}:
+ LorentzVectorCyl{Float32}(pt=87.42484, eta=1.4733886, phi=1.6855469, mass=0.20728905)
+ LorentzVectorCyl{Float32}(pt=7.1725554, eta=3.3784156, phi=1.3575952, mass=92.55651)
+
+julia> fast_mass.(v1, [v1, v2])
+2-element Vector{Float32}:
+  0.21212465
+ 92.55651
+```
+
 Some other helper functions
 
 ```julia
