@@ -22,7 +22,7 @@ py(v::LorentzVectorCyl) = v.pt * sin(v.phi)
 pz(v::LorentzVectorCyl) = v.pt * sinh(v.eta)
 
 function +(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
-    m1, m2 = max(v1.mass, zero(v1.pt)), max(v2.mass, zero(v1.pt))
+    m1, m2 = max(v1.mass, zero(v1.pt)), max(v2.mass, zero(v2.pt))
     
     px1, px2 = px(v1), px(v2)
     py1, py2 = py(v1), py(v2)
