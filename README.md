@@ -30,7 +30,7 @@ julia> @btime ($v1+$v2).mass
 92.55651f0
 
 julia> @btime fast_mass($v1,$v2)
-  20.447 ns (0 allocations: 0 bytes)
+  19.744 ns (0 allocations: 0 bytes)
 92.55651f0
 ```
 

@@ -21,7 +21,7 @@ px(v::LorentzVectorCyl) = v.pt * cos(v.phi)
 py(v::LorentzVectorCyl) = v.pt * sin(v.phi)
 pz(v::LorentzVectorCyl) = v.pt * sinh(v.eta)
 
-function +(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
+function +(v1::LorentzVectorCyl{T}, v2::LorentzVectorCyl{W}) where {T,W}
     m1, m2 = max(v1.mass, zero(v1.pt)), max(v2.mass, zero(v2.pt))
     
     px1, px2 = px(v1), px(v2)
@@ -57,10 +57,11 @@ function fast_mass(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
     # @fastmath sinh() is very slow in some cases
     sinheta1 = sinh(eta1)
     sinheta2 = sinh(eta2)
+    tpt12 = 2*pt1*pt2
     return @fastmath sqrt(max(m1^2 + m2^2
         + 2*sqrt((pt1^2*(1+sinheta1^2) + m1^2)*(pt2^2*(1+sinheta2^2) + m2^2))
-        - 2*pt1*pt2*sinheta1*sinheta2
-        - 2*pt1*pt2*cos(phi1-phi2), zero(pt1)))
+        - tpt12*sinheta1*sinheta2
+        - tpt12*cos(phi1-phi2), zero(pt1)))
 end
 
 

@@ -22,8 +22,8 @@ end
     v3 = LorentzVectorCyl(43.71242f0, 1.4733887f0, 1.6855469f0, 0.10571289f0)
     v4 = LorentzVectorCyl(36.994347f0, 0.38684082f0, -1.3935547f0, 0.10571289f0)
     vs = [v1, v2, v3, v4]
-    @test sum(vs).mass == 2881.063533925405
-    @test sum(LorentzVectorCyl[]).mass == 0
+    @test sum(vs).mass ≈ 2881.063533925405
+    @test sum(LorentzVectorCyl[]).mass ≈ 0
 end
 
 @testset "broadcasting" begin
