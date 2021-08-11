@@ -7,6 +7,8 @@ end
 
 Base.show(io::IO, v::LorentzVectorCyl) = print(io, "$(typeof(v))(pt=$(v.pt), eta=$(v.eta), phi=$(v.phi), mass=$(v.mass))")
 
+Base.broadcastable(v::LorentzVectorCyl) = Ref(v)
+
 """
     zero(LorentzVectorCyl)
     zero(LorentzVectorCyl{T})
