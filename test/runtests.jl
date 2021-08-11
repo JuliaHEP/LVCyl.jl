@@ -13,6 +13,12 @@ using LVCyl
     @test fast_mass(v1,v2) == 92.55651f0
     @test isapprox(deltar(v1,v2), 3.265188f0, atol=1e-6)
     @test isapprox(deltaphi(v1,v2), -3.0791016f0, atol=1e-6)
+
+    v3 = v1*5
+    @test v3.pt == 5*v1.pt
+    @test v3.mass == 5*v1.mass
+    @test v3.eta == v1.eta
+    @test v3.phi == v1.phi
 end
 
 

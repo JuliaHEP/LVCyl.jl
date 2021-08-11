@@ -21,6 +21,10 @@ px(v::LorentzVectorCyl) = v.pt * cos(v.phi)
 py(v::LorentzVectorCyl) = v.pt * sin(v.phi)
 pz(v::LorentzVectorCyl) = v.pt * sinh(v.eta)
 
+function *(v::LorentzVectorCyl{T}, k::Real) where T
+    LorentzVectorCyl{T}(v.pt*k, v.eta, v.phi, v.mass*k)
+end
+
 function +(v1::LorentzVectorCyl{T}, v2::LorentzVectorCyl{W}) where {T,W}
     m1, m2 = max(v1.mass, zero(v1.pt)), max(v2.mass, zero(v2.pt))
     
