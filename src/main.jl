@@ -91,3 +91,11 @@ function tocartesian(v::LorentzVectorCyl)
     t = sqrt(x^2 + y^2 + z^2 + m^2)
     (t=t, x=x, y=y, z=z)
 end
+
+function fromcartesian(t, x, y, z)
+    pt = sqrt(x^2 + y^2)
+    eta = asinh(z/pt)
+    phi = atan(y, x)
+    mass = sqrt(t^2 - x^2 - y^2 - z^2)
+    return LorentzVectorCyl(pt,eta,phi,mass)
+end

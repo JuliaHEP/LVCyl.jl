@@ -57,12 +57,15 @@ julia> deltaphi(v1,v2)
 julia> deltar(v1,v2)
 3.265188f0
 
-# convert to cartesian `LorentzVector`...
+# convert to and from cartesian `LorentzVector`
 julia> using LorentzVectors
 
 julia> tocartesian(v1)
 (t = 100.38882f0, x = -5.0050235f0, y = 43.424942f0, z = 90.37216f0)
 
-julia> LorentzVector(tocartesian(v1)...) 
+julia> v3 = LorentzVector(tocartesian(v1)...) 
 LorentzVector{Float32}(100.38882f0, -5.0050235f0, 43.424942f0, 90.37216f0)
+
+julia> fromcartesian(v3.t, v3.x, v3.y, v3.z)
+LorentzVectorCyl{Float32}(pt=43.71242, eta=1.4733886, phi=1.6855469, mass=0.10597391)
 ```
