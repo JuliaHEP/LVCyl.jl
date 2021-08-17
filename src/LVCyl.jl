@@ -3,7 +3,7 @@ module LVCyl
 export LorentzVectorCyl
 
 export px, py, pz, fast_mass
-export deltaphi, deltar2, deltar, tocartesian
+export deltaphi, deltar, tocartesian, fromcartesian
 
 import Base: +, *, zero
 

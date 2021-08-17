@@ -41,3 +41,12 @@ end
     @test all([v.mass for v in vs] .== mass)
     @test fast_mass.(vs[1], vs[2:end]) == fast_mass.(Ref(vs[1]), vs[2:end])
 end
+
+@testset "conversions" begin
+    v1 = LorentzVectorCyl(1761.65,-2.30322,-2.5127,0.105652)
+    v2 = fromcartesian(tocartesian(v1)...)
+    @test v1.pt ≈ v2.pt
+    @test v1.eta ≈ v2.eta
+    @test v1.phi ≈ v2.phi
+    @test v1.mass ≈ v2.mass atol=1e-6
+end
