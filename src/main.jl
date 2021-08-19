@@ -20,6 +20,7 @@ Base.zero(::Type{LorentzVectorCyl}) = zero(LorentzVectorCyl{Float64})
 px(v::LorentzVectorCyl) = v.pt * cos(v.phi)
 py(v::LorentzVectorCyl) = v.pt * sin(v.phi)
 pz(v::LorentzVectorCyl) = v.pt * sinh(v.eta)
+energy(v::LorentzVectorCyl) = sqrt(px(v)^2 + py(v)^2 + pz(v)^2 + v.mass^2)
 
 function *(v::LorentzVectorCyl{T}, k::Real) where T
     LorentzVectorCyl{T}(v.pt*k, v.eta, v.phi, v.mass*k)
@@ -87,8 +88,7 @@ function tocartesian(v::LorentzVectorCyl)
     x = px(v)
     y = py(v)
     z = pz(v)
-    m = v.mass
-    t = sqrt(x^2 + y^2 + z^2 + m^2)
+    t = energy(v)
     (t=t, x=x, y=y, z=z)
 end
 
@@ -96,6 +96,6 @@ function fromcartesian(t, x, y, z)
     pt = sqrt(x^2 + y^2)
     eta = asinh(z/pt)
     phi = atan(y, x)
-    mass = sqrt(t^2 - x^2 - y^2 - z^2)
+    mass = sqrt(max(t^2 - x^2 - y^2 - z^2, 0))
     return LorentzVectorCyl(pt,eta,phi,mass)
 end
