@@ -4,6 +4,11 @@ using LVCyl
 @testset "calculations" begin
     v1 = LorentzVectorCyl(1761.65,-2.30322,-2.5127,0.105652)
     v2 = LorentzVectorCyl(115.906,-2.28564,-2.50781,0.105713)
+    @test energy(v1) ≈ 8901.870789524375 atol=1e-6
+    @test px(v1) ≈ -1424.610065192358 atol=1e-6
+    @test py(v1) ≈ -1036.2899616674022 atol=1e-6
+    @test pz(v1) ≈ -8725.817601790963 atol=1e-6
+
     @test isapprox((v1+v2).mass, 8.25741602000877, atol=1e-6)
     @test isapprox(fast_mass(v1,v2), 8.25741602000877, atol=1e-6)
 
