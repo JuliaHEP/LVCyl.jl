@@ -48,11 +48,15 @@ julia> fast_mass.(v1, [v1, v2])
  92.55651
 ```
 
-Some other helper functions
+Some other helper functions. Note that "Δϕ" can be typed by `\Delta`<kbd>TAB</kbd>`\phi`<kbd>TAB</kbd>
+in the julia REPL or a notebook.
 
 ```julia
 julia> Δϕ(v1,v2)
 -3.0791016f0
+
+julia> Δη(v1,v2)
+-1.0865479f0
 
 julia> ΔR(v1,v2)
 3.265188f0
