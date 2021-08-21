@@ -76,13 +76,21 @@ end
     dphi = dphi - 2*pi*(dphi > pi) + 2*pi*(dphi <= -pi)
     return dphi
 end
+const Δϕ = deltaphi
 
-@inline deltar(v1::LorentzVectorCyl, v2::LorentzVectorCyl) = sqrt(deltar2(v1, v2))
+@inline function deltaeta(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
+    return v2.eta - v1.eta
+end
+const Δη = deltaeta
+
 @inline function deltar2(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
     dphi = deltaphi(v1,v2)
-    deta = v1.eta - v2.eta
+    deta = deltaeta(v1,v2)
     return dphi^2 + deta^2
 end
+@inline deltar(v1::LorentzVectorCyl, v2::LorentzVectorCyl) = sqrt(deltar2(v1, v2))
+const ΔR = deltar
+
 
 function tocartesian(v::LorentzVectorCyl)
     x = px(v)

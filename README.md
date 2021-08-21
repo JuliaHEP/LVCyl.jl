@@ -51,10 +51,10 @@ julia> fast_mass.(v1, [v1, v2])
 Some other helper functions
 
 ```julia
-julia> deltaphi(v1,v2)
+julia> Δϕ(v1,v2)
 -3.0791016f0
 
-julia> deltar(v1,v2)
+julia> ΔR(v1,v2)
 3.265188f0
 
 # convert to and from cartesian `LorentzVector`
