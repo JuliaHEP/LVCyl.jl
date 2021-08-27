@@ -44,7 +44,7 @@ julia> v1 .+ [v1, v2]
 
 julia> fast_mass.(v1, [v1, v2])
 2-element Vector{Float32}:
-  0.21212465
+  0.2104957
  92.55651
 ```
 
