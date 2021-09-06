@@ -43,7 +43,7 @@ function +(v1::LorentzVectorCyl{T}, v2::LorentzVectorCyl{W}) where {T,W}
     pt = sqrt(ptsq)
     eta = asinh(sumpz/pt)
     phi = atan(sumpy, sumpx)
-    mass = sqrt(max(muladd(m1, m1, m2^2) + muladd(2, e1, e2) - 2*(muladd(px1, px2, py1*py2) + pz1*pz2), zero(v1.pt)))
+    mass = sqrt(max(muladd(m1, m1, m2^2) + 2*e1*e2 - 2*(muladd(px1, px2, py1*py2) + pz1*pz2), zero(v1.pt)))
     return LorentzVectorCyl(pt,eta,phi,mass)
 end
 
