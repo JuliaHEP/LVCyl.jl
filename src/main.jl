@@ -43,7 +43,7 @@ function +(v1::LorentzVectorCyl{T}, v2::LorentzVectorCyl{W}) where {T,W}
     pt = sqrt(ptsq)
     eta = asinh(sumpz/pt)
     phi = atan(sumpy, sumpx)
-    mass = sqrt(max(m1^2 + m2^2 + 2*e1*e2 - 2*(px1*px2 + py1*py2 + pz1*pz2), zero(v1.pt)))
+    mass = sqrt(max(muladd(m1, m1, m2^2) + muladd(2, e1, e2) - 2*(muladd(px1, px2, py1*py2) + pz1*pz2), zero(v1.pt)))
     return LorentzVectorCyl(pt,eta,phi,mass)
 end
 
@@ -63,7 +63,7 @@ function fast_mass(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
     sinheta1 = sinh(eta1)
     sinheta2 = sinh(eta2)
     tpt12 = 2*pt1*pt2
-    return @fastmath sqrt(max(m1^2 + m2^2
+    return @fastmath sqrt(max(muladd(m1, m1, m2^2)
         + 2*sqrt((pt1^2*(1+sinheta1^2) + m1^2)*(pt2^2*(1+sinheta2^2) + m2^2))
         - tpt12*sinheta1*sinheta2
         - tpt12*cos(phi1-phi2), zero(pt1)))
@@ -86,7 +86,7 @@ const Δη = deltaeta
 @inline function deltar2(v1::LorentzVectorCyl, v2::LorentzVectorCyl)
     dphi = deltaphi(v1,v2)
     deta = deltaeta(v1,v2)
-    return dphi^2 + deta^2
+    return muladd(dphi, dphi, deta^2)
 end
 @inline deltar(v1::LorentzVectorCyl, v2::LorentzVectorCyl) = sqrt(deltar2(v1, v2))
 const ΔR = deltar
@@ -101,7 +101,7 @@ function tocartesian(v::LorentzVectorCyl)
 end
 
 function fromcartesian(t, x, y, z)
-    pt = sqrt(x^2 + y^2)
+    pt = sqrt(muladd(x, x, y^2))
     eta = asinh(z/pt)
     phi = atan(y, x)
     mass = sqrt(max(t^2 - x^2 - y^2 - z^2, 0))
