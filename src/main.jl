@@ -29,11 +29,11 @@ end
 function +(v1::LorentzVectorCyl{T}, v2::LorentzVectorCyl{W}) where {T,W}
     m1, m2 = max(v1.mass, zero(v1.pt)), max(v2.mass, zero(v2.pt))
     
-    px1, px2 = px(v1), px(v2)
-    py1, py2 = py(v1), py(v2)
+    py1, px1 = v1.pt .* sincos(v1.phi)
+    py2, px2 = v2.pt .* sincos(v2.phi)
     pz1, pz2 = pz(v1), pz(v2)
-    e1 = sqrt(px1^2 + py1^2 + pz1^2 + m1^2)
-    e2 = sqrt(px2^2 + py2^2 + pz2^2 + m2^2)
+    e1 = sqrt(v1.pt^2 + pz1^2 + m1^2)
+    e2 = sqrt(v2.pt^2 + pz2^2 + m2^2)
     
     sumpx = px1+px2
     sumpy = py1+py2
