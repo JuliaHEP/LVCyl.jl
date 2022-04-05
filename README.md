@@ -1,5 +1,9 @@
 # LVCyl.jl
 
+# Deprecated
+in favor of: https://github.com/JuliaHEP/LorentzVectorHEP.jl
+
+- - -
 This package is a minimal version of [LorentzVectors.jl](https://github.com/JLTastet/LorentzVectors.jl) except using
 a cylindrical coordinate system (pT, eta, phi, mass) instead of cartesian (t, x, y, z).
 
